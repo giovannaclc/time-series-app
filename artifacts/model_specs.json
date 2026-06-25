@@ -1,0 +1,279 @@
+{
+  "specs": {
+    "Portugal": {
+      "short_name": "Portugal",
+      "type": "SARIMA",
+      "order": [
+        1,
+        1,
+        2
+      ],
+      "seasonal_order": [
+        0,
+        0,
+        1,
+        12
+      ],
+      "exog": [],
+      "aic": 1248.7,
+      "anchor_date": "2026-03",
+      "anchor_value": 2151.0,
+      "forecast_start": "2026-04",
+      "forecast_end": "2027-03",
+      "forecast_end_value": 2438.7,
+      "pct_change_12m": 13.4
+    },
+    "Norte": {
+      "short_name": "Norte",
+      "type": "SARIMA",
+      "order": [
+        1,
+        1,
+        2
+      ],
+      "seasonal_order": [
+        0,
+        0,
+        1,
+        12
+      ],
+      "exog": [],
+      "aic": 1231.5,
+      "anchor_date": "2026-03",
+      "anchor_value": 1834.0,
+      "forecast_start": "2026-04",
+      "forecast_end": "2027-03",
+      "forecast_end_value": 2078.1,
+      "pct_change_12m": 13.3
+    },
+    "Centro": {
+      "short_name": "Centro",
+      "type": "SARIMA",
+      "order": [
+        1,
+        1,
+        2
+      ],
+      "seasonal_order": [
+        0,
+        0,
+        1,
+        12
+      ],
+      "exog": [],
+      "aic": 1264.7,
+      "anchor_date": "2026-03",
+      "anchor_value": 1363.0,
+      "forecast_start": "2026-04",
+      "forecast_end": "2027-03",
+      "forecast_end_value": 1391.6,
+      "pct_change_12m": 2.1
+    },
+    "Oeste e Vale do Tejo": {
+      "short_name": "Oeste e Vale do Tejo",
+      "type": "SARIMAX",
+      "order": [
+        1,
+        1,
+        1
+      ],
+      "seasonal_order": [
+        1,
+        0,
+        0,
+        12
+      ],
+      "exog": [
+        "mortgage",
+        "new_houses",
+        "unemployment"
+      ],
+      "aic": 1309.5,
+      "anchor_date": "2025-10",
+      "anchor_value": 1583.0,
+      "forecast_start": "2025-11",
+      "forecast_end": "2026-10",
+      "forecast_end_value": 1858.7,
+      "pct_change_12m": 17.4
+    },
+    "Grande Lisboa": {
+      "short_name": "Grande Lisboa",
+      "type": "SARIMAX",
+      "order": [
+        1,
+        1,
+        1
+      ],
+      "seasonal_order": [
+        1,
+        0,
+        0,
+        12
+      ],
+      "exog": [
+        "inflation",
+        "mortgage",
+        "new_houses",
+        "unemployment"
+      ],
+      "aic": 1469.4,
+      "anchor_date": "2025-10",
+      "anchor_value": 3030.0,
+      "forecast_start": "2025-11",
+      "forecast_end": "2026-10",
+      "forecast_end_value": 3444.1,
+      "pct_change_12m": 13.7
+    },
+    "Península de Setúbal": {
+      "short_name": "Península de Setúbal",
+      "type": "SARIMA",
+      "order": [
+        1,
+        1,
+        2
+      ],
+      "seasonal_order": [
+        0,
+        0,
+        1,
+        12
+      ],
+      "exog": [],
+      "aic": 1337.1,
+      "anchor_date": "2026-03",
+      "anchor_value": 2653.0,
+      "forecast_start": "2026-04",
+      "forecast_end": "2027-03",
+      "forecast_end_value": 3110.1,
+      "pct_change_12m": 17.2
+    },
+    "Alentejo": {
+      "short_name": "Alentejo",
+      "type": "SARIMA",
+      "order": [
+        2,
+        1,
+        2
+      ],
+      "seasonal_order": [
+        1,
+        0,
+        0,
+        12
+      ],
+      "exog": [],
+      "aic": 1512.5,
+      "anchor_date": "2026-03",
+      "anchor_value": 1352.0,
+      "forecast_start": "2026-04",
+      "forecast_end": "2027-03",
+      "forecast_end_value": 1351.2,
+      "pct_change_12m": -0.1
+    },
+    "Algarve": {
+      "short_name": "Algarve",
+      "type": "SARIMA",
+      "order": [
+        2,
+        1,
+        2
+      ],
+      "seasonal_order": [
+        1,
+        0,
+        1,
+        12
+      ],
+      "exog": [],
+      "aic": 1620.8,
+      "anchor_date": "2026-03",
+      "anchor_value": 2840.0,
+      "forecast_start": "2026-04",
+      "forecast_end": "2027-03",
+      "forecast_end_value": 2982.8,
+      "pct_change_12m": 5.0
+    },
+    "Região Autónoma dos Açores": {
+      "short_name": "R.A. Açores",
+      "type": "SARIMA",
+      "order": [
+        2,
+        1,
+        2
+      ],
+      "seasonal_order": [
+        0,
+        0,
+        1,
+        12
+      ],
+      "exog": [],
+      "aic": 1552.4,
+      "anchor_date": "2026-03",
+      "anchor_value": 1575.0,
+      "forecast_start": "2026-04",
+      "forecast_end": "2027-03",
+      "forecast_end_value": 1586.1,
+      "pct_change_12m": 0.7
+    },
+    "Região Autónoma da Madeira": {
+      "short_name": "R.A. Madeira",
+      "type": "SARIMAX",
+      "order": [
+        1,
+        1,
+        2
+      ],
+      "seasonal_order": [
+        1,
+        0,
+        0,
+        12
+      ],
+      "exog": [
+        "inflation",
+        "mortgage",
+        "new_houses",
+        "unemployment"
+      ],
+      "aic": 1602.1,
+      "anchor_date": "2025-10",
+      "anchor_value": 2308.0,
+      "forecast_start": "2025-11",
+      "forecast_end": "2026-10",
+      "forecast_end_value": 2330.0,
+      "pct_change_12m": 1.0
+    }
+  },
+  "sarimax_regions": [
+    "Oeste e Vale do Tejo",
+    "Grande Lisboa",
+    "R.A. Madeira"
+  ],
+  "n_regions": 10,
+  "verdict": "SARIMAX was selected over SARIMA in 3 of 10 regions: Oeste e Vale do Tejo, Grande Lisboa, R.A. Madeira. Elsewhere the simpler SARIMA model was kept.",
+  "colors": {
+    "Portugal": "#1a1a2e",
+    "Norte": "#e94560",
+    "Centro": "#f5a623",
+    "Oeste e Vale do Tejo": "#2ecc71",
+    "Grande Lisboa": "#3498db",
+    "Península de Setúbal": "#9b59b6",
+    "Alentejo": "#e67e22",
+    "Algarve": "#1abc9c",
+    "Região Autónoma dos Açores": "#c0392b",
+    "Região Autónoma da Madeira": "#34495e"
+  },
+  "short_names": {
+    "Portugal": "Portugal",
+    "Norte": "Norte",
+    "Centro": "Centro",
+    "Oeste e Vale do Tejo": "Oeste e Vale do Tejo",
+    "Grande Lisboa": "Grande Lisboa",
+    "Península de Setúbal": "Península de Setúbal",
+    "Alentejo": "Alentejo",
+    "Algarve": "Algarve",
+    "Região Autónoma dos Açores": "R.A. Açores",
+    "Região Autónoma da Madeira": "R.A. Madeira"
+  }
+}

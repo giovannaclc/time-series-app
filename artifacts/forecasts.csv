@@ -1,0 +1,121 @@
+region,short_name,date,point,lower95,upper95,model
+Portugal,Portugal,2026-04-01,2176.1,2161.9,2190.2,SARIMA
+Portugal,Portugal,2026-05-01,2200.2,2176.3,2224.1,SARIMA
+Portugal,Portugal,2026-06-01,2224.6,2192.1,2257.1,SARIMA
+Portugal,Portugal,2026-07-01,2249.6,2208.7,2290.4,SARIMA
+Portugal,Portugal,2026-08-01,2273.2,2224.0,2322.4,SARIMA
+Portugal,Portugal,2026-09-01,2297.5,2239.7,2355.3,SARIMA
+Portugal,Portugal,2026-10-01,2321.6,2255.1,2388.2,SARIMA
+Portugal,Portugal,2026-11-01,2346.2,2270.7,2421.6,SARIMA
+Portugal,Portugal,2026-12-01,2369.5,2284.8,2454.1,SARIMA
+Portugal,Portugal,2027-01-01,2392.8,2298.7,2486.8,SARIMA
+Portugal,Portugal,2027-02-01,2415.3,2311.6,2519.0,SARIMA
+Portugal,Portugal,2027-03-01,2438.7,2325.1,2552.3,SARIMA
+Norte,Norte,2026-04-01,1856.3,1842.8,1869.8,SARIMA
+Norte,Norte,2026-05-01,1876.7,1854.5,1899.0,SARIMA
+Norte,Norte,2026-06-01,1897.0,1867.4,1926.5,SARIMA
+Norte,Norte,2026-07-01,1917.2,1880.8,1953.6,SARIMA
+Norte,Norte,2026-08-01,1937.4,1894.4,1980.5,SARIMA
+Norte,Norte,2026-09-01,1957.7,1908.0,2007.3,SARIMA
+Norte,Norte,2026-10-01,1978.2,1921.9,2034.4,SARIMA
+Norte,Norte,2026-11-01,1998.4,1935.4,2061.3,SARIMA
+Norte,Norte,2026-12-01,2018.5,1948.7,2088.2,SARIMA
+Norte,Norte,2027-01-01,2038.2,1961.6,2114.9,SARIMA
+Norte,Norte,2027-02-01,2058.1,1974.4,2141.7,SARIMA
+Norte,Norte,2027-03-01,2078.1,1987.4,2168.8,SARIMA
+Centro,Centro,2026-04-01,1372.5,1357.7,1387.4,SARIMA
+Centro,Centro,2026-05-01,1378.2,1350.3,1406.0,SARIMA
+Centro,Centro,2026-06-01,1377.5,1335.3,1419.6,SARIMA
+Centro,Centro,2026-07-01,1378.3,1326.4,1430.2,SARIMA
+Centro,Centro,2026-08-01,1378.5,1318.3,1438.8,SARIMA
+Centro,Centro,2026-09-01,1381.3,1313.8,1448.8,SARIMA
+Centro,Centro,2026-10-01,1384.3,1310.2,1458.4,SARIMA
+Centro,Centro,2026-11-01,1386.3,1306.2,1466.5,SARIMA
+Centro,Centro,2026-12-01,1386.6,1300.8,1472.3,SARIMA
+Centro,Centro,2027-01-01,1387.6,1296.6,1478.6,SARIMA
+Centro,Centro,2027-02-01,1389.1,1293.1,1485.1,SARIMA
+Centro,Centro,2027-03-01,1391.6,1290.9,1492.3,SARIMA
+Oeste e Vale do Tejo,Oeste e Vale do Tejo,2025-11-01,1604.0,1585.8,1622.2,SARIMAX
+Oeste e Vale do Tejo,Oeste e Vale do Tejo,2025-12-01,1626.1,1598.9,1653.3,SARIMAX
+Oeste e Vale do Tejo,Oeste e Vale do Tejo,2026-01-01,1648.6,1613.5,1683.8,SARIMAX
+Oeste e Vale do Tejo,Oeste e Vale do Tejo,2026-02-01,1672.0,1629.3,1714.7,SARIMAX
+Oeste e Vale do Tejo,Oeste e Vale do Tejo,2026-03-01,1694.7,1644.6,1744.8,SARIMAX
+Oeste e Vale do Tejo,Oeste e Vale do Tejo,2026-04-01,1717.8,1660.3,1775.3,SARIMAX
+Oeste e Vale do Tejo,Oeste e Vale do Tejo,2026-05-01,1741.0,1676.1,1806.0,SARIMAX
+Oeste e Vale do Tejo,Oeste e Vale do Tejo,2026-06-01,1765.1,1692.6,1837.5,SARIMAX
+Oeste e Vale do Tejo,Oeste e Vale do Tejo,2026-07-01,1788.2,1708.1,1868.3,SARIMAX
+Oeste e Vale do Tejo,Oeste e Vale do Tejo,2026-08-01,1812.9,1725.0,1900.7,SARIMAX
+Oeste e Vale do Tejo,Oeste e Vale do Tejo,2026-09-01,1835.8,1740.1,1931.6,SARIMAX
+Oeste e Vale do Tejo,Oeste e Vale do Tejo,2026-10-01,1858.7,1754.9,1962.5,SARIMAX
+Grande Lisboa,Grande Lisboa,2025-11-01,3068.1,3039.4,3096.7,SARIMAX
+Grande Lisboa,Grande Lisboa,2025-12-01,3104.4,3059.1,3149.6,SARIMAX
+Grande Lisboa,Grande Lisboa,2026-01-01,3140.3,3078.9,3201.7,SARIMAX
+Grande Lisboa,Grande Lisboa,2026-02-01,3177.6,3099.9,3255.3,SARIMAX
+Grande Lisboa,Grande Lisboa,2026-03-01,3212.2,3117.7,3306.8,SARIMAX
+Grande Lisboa,Grande Lisboa,2026-04-01,3247.9,3136.1,3359.8,SARIMAX
+Grande Lisboa,Grande Lisboa,2026-05-01,3283.4,3153.7,3413.1,SARIMAX
+Grande Lisboa,Grande Lisboa,2026-06-01,3318.4,3170.3,3466.4,SARIMAX
+Grande Lisboa,Grande Lisboa,2026-07-01,3351.8,3184.8,3518.8,SARIMAX
+Grande Lisboa,Grande Lisboa,2026-08-01,3380.9,3194.6,3567.2,SARIMAX
+Grande Lisboa,Grande Lisboa,2026-09-01,3412.8,3206.7,3618.9,SARIMAX
+Grande Lisboa,Grande Lisboa,2026-10-01,3444.1,3217.7,3670.4,SARIMAX
+Península de Setúbal,Península de Setúbal,2026-04-01,2696.4,2678.4,2714.5,SARIMA
+Península de Setúbal,Península de Setúbal,2026-05-01,2737.5,2706.5,2768.5,SARIMA
+Península de Setúbal,Península de Setúbal,2026-06-01,2779.5,2736.0,2823.0,SARIMA
+Península de Setúbal,Península de Setúbal,2026-07-01,2818.6,2762.3,2874.8,SARIMA
+Península de Setúbal,Península de Setúbal,2026-08-01,2856.7,2787.2,2926.1,SARIMA
+Península de Setúbal,Península de Setúbal,2026-09-01,2897.4,2814.2,2980.6,SARIMA
+Península de Setúbal,Península de Setúbal,2026-10-01,2938.1,2840.7,3035.5,SARIMA
+Península de Setúbal,Península de Setúbal,2026-11-01,2973.5,2861.3,3085.6,SARIMA
+Península de Setúbal,Península de Setúbal,2026-12-01,3006.3,2879.0,3133.7,SARIMA
+Península de Setúbal,Península de Setúbal,2027-01-01,3041.2,2898.2,3184.2,SARIMA
+Península de Setúbal,Península de Setúbal,2027-02-01,3076.2,2917.1,3235.2,SARIMA
+Península de Setúbal,Península de Setúbal,2027-03-01,3110.1,2934.6,3285.6,SARIMA
+Alentejo,Alentejo,2026-04-01,1358.1,1328.9,1387.3,SARIMA
+Alentejo,Alentejo,2026-05-01,1358.5,1309.6,1407.5,SARIMA
+Alentejo,Alentejo,2026-06-01,1356.8,1289.5,1424.0,SARIMA
+Alentejo,Alentejo,2026-07-01,1355.7,1278.1,1433.4,SARIMA
+Alentejo,Alentejo,2026-08-01,1355.4,1267.4,1443.4,SARIMA
+Alentejo,Alentejo,2026-09-01,1353.7,1256.3,1451.2,SARIMA
+Alentejo,Alentejo,2026-10-01,1354.8,1249.1,1460.5,SARIMA
+Alentejo,Alentejo,2026-11-01,1353.5,1240.0,1467.0,SARIMA
+Alentejo,Alentejo,2026-12-01,1353.4,1232.6,1474.2,SARIMA
+Alentejo,Alentejo,2027-01-01,1352.4,1224.8,1480.0,SARIMA
+Alentejo,Alentejo,2027-02-01,1352.0,1217.9,1486.2,SARIMA
+Alentejo,Alentejo,2027-03-01,1351.2,1210.9,1491.6,SARIMA
+Algarve,Algarve,2026-04-01,2843.2,2804.5,2881.9,SARIMA
+Algarve,Algarve,2026-05-01,2869.7,2804.8,2934.6,SARIMA
+Algarve,Algarve,2026-06-01,2883.3,2789.5,2977.2,SARIMA
+Algarve,Algarve,2026-07-01,2898.0,2789.0,3007.0,SARIMA
+Algarve,Algarve,2026-08-01,2904.2,2779.3,3029.1,SARIMA
+Algarve,Algarve,2026-09-01,2921.7,2783.4,3060.0,SARIMA
+Algarve,Algarve,2026-10-01,2929.7,2779.1,3080.3,SARIMA
+Algarve,Algarve,2026-11-01,2931.4,2769.5,3093.4,SARIMA
+Algarve,Algarve,2026-12-01,2934.7,2762.2,3107.3,SARIMA
+Algarve,Algarve,2027-01-01,2951.7,2769.2,3134.3,SARIMA
+Algarve,Algarve,2027-02-01,2970.3,2778.2,3162.3,SARIMA
+Algarve,Algarve,2027-03-01,2982.8,2781.8,3183.9,SARIMA
+Região Autónoma dos Açores,R.A. Açores,2026-04-01,1569.3,1536.7,1601.9,SARIMA
+Região Autónoma dos Açores,R.A. Açores,2026-05-01,1569.4,1517.2,1621.6,SARIMA
+Região Autónoma dos Açores,R.A. Açores,2026-06-01,1571.9,1499.5,1644.3,SARIMA
+Região Autónoma dos Açores,R.A. Açores,2026-07-01,1572.0,1488.5,1655.6,SARIMA
+Região Autónoma dos Açores,R.A. Açores,2026-08-01,1573.0,1478.0,1668.1,SARIMA
+Região Autónoma dos Açores,R.A. Açores,2026-09-01,1576.1,1471.0,1681.3,SARIMA
+Região Autónoma dos Açores,R.A. Açores,2026-10-01,1578.6,1464.5,1692.7,SARIMA
+Região Autónoma dos Açores,R.A. Açores,2026-11-01,1582.7,1460.1,1705.3,SARIMA
+Região Autónoma dos Açores,R.A. Açores,2026-12-01,1582.6,1452.1,1713.0,SARIMA
+Região Autónoma dos Açores,R.A. Açores,2027-01-01,1585.0,1447.1,1722.8,SARIMA
+Região Autónoma dos Açores,R.A. Açores,2027-02-01,1585.3,1440.4,1730.2,SARIMA
+Região Autónoma dos Açores,R.A. Açores,2027-03-01,1586.1,1434.5,1737.8,SARIMA
+Região Autónoma da Madeira,R.A. Madeira,2025-11-01,2315.1,2273.6,2356.7,SARIMAX
+Região Autónoma da Madeira,R.A. Madeira,2025-12-01,2306.6,2238.4,2374.8,SARIMAX
+Região Autónoma da Madeira,R.A. Madeira,2026-01-01,2311.7,2214.8,2408.7,SARIMAX
+Região Autónoma da Madeira,R.A. Madeira,2026-02-01,2313.9,2199.9,2427.9,SARIMAX
+Região Autónoma da Madeira,R.A. Madeira,2026-03-01,2318.4,2187.0,2449.8,SARIMAX
+Região Autónoma da Madeira,R.A. Madeira,2026-04-01,2320.6,2175.2,2465.9,SARIMAX
+Região Autónoma da Madeira,R.A. Madeira,2026-05-01,2319.6,2160.8,2478.5,SARIMAX
+Região Autónoma da Madeira,R.A. Madeira,2026-06-01,2321.7,2150.9,2492.6,SARIMAX
+Região Autónoma da Madeira,R.A. Madeira,2026-07-01,2325.8,2143.5,2508.1,SARIMAX
+Região Autónoma da Madeira,R.A. Madeira,2026-08-01,2328.8,2135.8,2521.7,SARIMAX
+Região Autónoma da Madeira,R.A. Madeira,2026-09-01,2330.4,2127.3,2533.5,SARIMAX
+Região Autónoma da Madeira,R.A. Madeira,2026-10-01,2330.0,2117.2,2542.7,SARIMAX
