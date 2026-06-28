@@ -78,6 +78,8 @@ FORECAST_STEPS = 12
 HOLDOUT = 12
 ARIMA_BASELINE = (2, 2, 2)
 ACF_LAGS = 24
+# Supply scenarios: scale "new houses built" relative to its latest value.
+SUPPLY_LEVELS = [-0.50, -0.30, -0.15, 0.0, 0.15, 0.30, 0.50]
 
 
 # ─────────────────────────────────────────────────────────────────────────────
@@ -281,6 +283,55 @@ def holdout_metrics(df, inflation, mortgage, new_houses, unemploy, end_date, reg
 
 
 # ─────────────────────────────────────────────────────────────────────────────
+# 3b. Housing-supply scenarios for the SARIMAX regions
+#     Re-run each final SARIMAX forecast with "new houses built" scaled by
+#     ±X% versus its latest value (all other exogenous drivers held flat).
+#     ARIMA/SARIMA regions have no supply lever, so they are excluded.
+# ─────────────────────────────────────────────────────────────────────────────
+def supply_scenarios(df, inflation, mortgage, new_houses, unemploy):
+    rows = []
+    supply_meta = {}
+    for col in sarimax_specs:
+        spec = sarimax_specs[col]
+        y, exog = fit_sample_full(col, df, inflation, mortgage, new_houses, unemploy)
+        model = SARIMAX(y, exog=exog, order=spec["r_order"],
+                        seasonal_order=spec["s_order"]).fit(disp=False)
+
+        base_last = exog.iloc[-1].copy()
+        anchor = float(y.iloc[-1])
+        last_date = y.index[-1]
+        future_dates = pd.date_range(
+            start=last_date + pd.DateOffset(months=1),
+            periods=FORECAST_STEPS, freq="MS",
+        )
+
+        for lv in SUPPLY_LEVELS:
+            future_exog = pd.DataFrame(
+                [base_last.values] * FORECAST_STEPS, columns=exog.columns
+            )
+            future_exog["new_houses"] = base_last["new_houses"] * (1 + lv)
+            mean = model.get_forecast(steps=FORECAST_STEPS, exog=future_exog).predicted_mean
+            for d, m in zip(future_dates, mean.values):
+                rows.append({
+                    "region": col, "short_name": short_names[col],
+                    "supply_pct": int(round(lv * 100)),
+                    "date": d, "point": round(float(m), 1),
+                })
+
+        coef = float(model.params.get("new_houses", float("nan")))
+        supply_meta[col] = {
+            "short_name": short_names[col],
+            "coef_per_house": round(coef, 5),
+            "eur_per_10k_houses": round(coef * 10_000, 0),
+            "new_houses_baseline": round(float(base_last["new_houses"]), 0),
+            "anchor_value": round(anchor, 1),
+        }
+        print(f"  {short_names[col]:<24} new_houses coef={coef:+.4f}  "
+              f"(≈ {coef * 10_000:+,.0f} €/m² per 10k homes)")
+    return pd.DataFrame(rows), supply_meta
+
+
+# ─────────────────────────────────────────────────────────────────────────────
 # 4. ACF / PACF for model identification (notebook cells 8 [d=2] and 9 [d=1])
 # ─────────────────────────────────────────────────────────────────────────────
 def acf_pacf_table(df, regions):
@@ -337,10 +388,17 @@ def main():
                           unemploy, end_date, regions)
     met.to_csv(ART / "metrics.csv", index=False)
 
+    print("\nHousing-supply scenarios (SARIMAX regions) ...")
+    scen_df, supply_meta = supply_scenarios(df, inflation, mortgage,
+                                            new_houses, unemploy)
+    scen_df.to_csv(ART / "scenarios.csv", index=False)
+
     sarimax_regions = [short_names[c] for c in sarimax_specs]
     meta = {
         "specs": specs,
         "sarimax_regions": sarimax_regions,
+        "supply": supply_meta,
+        "supply_levels": [int(round(l * 100)) for l in SUPPLY_LEVELS],
         "n_regions": len(regions),
         "verdict": (
             f"SARIMAX was selected over SARIMA in {len(sarimax_specs)} of "

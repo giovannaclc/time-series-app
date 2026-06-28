@@ -2,8 +2,8 @@
 Housing Price Dynamics in Portuguese Regions — interactive presentation app.
 
 Reads pre-computed artifacts from ./artifacts/ (produced by export_artifacts.py)
-and presents the historical series, 12-month forecasts, and model comparison.
-The app does NO modelling.
+and presents the historical series, 12-month forecasts, and housing-supply
+scenarios for the SARIMAX regions. The app does NO modelling.
 
     streamlit run app.py
 """
@@ -42,10 +42,10 @@ def load_artifacts():
         return None
     history = pd.read_csv(ART / "history.csv", index_col="date", parse_dates=True)
     forecasts = pd.read_csv(ART / "forecasts.csv", parse_dates=["date"])
-    metrics = pd.read_csv(ART / "metrics.csv")
+    scenarios = pd.read_csv(ART / "scenarios.csv", parse_dates=["date"])
     acf_pacf = pd.read_csv(ART / "acf_pacf.csv")
     meta = json.loads((ART / "model_specs.json").read_text())
-    return history, forecasts, metrics, acf_pacf, meta
+    return history, forecasts, scenarios, acf_pacf, meta
 
 
 data = load_artifacts()
@@ -56,7 +56,7 @@ if data is None:
     )
     st.stop()
 
-history, forecasts, metrics, acf_pacf, meta = data
+history, forecasts, scenarios, acf_pacf, meta = data
 colors = meta["colors"]
 short_names = meta["short_names"]
 specs = meta["specs"]
@@ -138,7 +138,7 @@ view = st.sidebar.radio(
         "Overview",
         "Methodology",
         "Region explorer",
-        "Model comparison",
+        "Housing supply impact",
         "Key findings",
     ],
     label_visibility="collapsed",
@@ -177,8 +177,8 @@ if view == "Introduction":
 
     st.info(
         "Use the **Context** menu on the left to walk through the data and method, "
-        "or jump straight to **Overview**, **Region explorer** and **Model "
-        "comparison** to explore the results interactively."
+        "or jump straight to **Overview**, **Region explorer** and **Housing supply "
+        "impact** to explore the results interactively."
     )
 
 
@@ -425,50 +425,110 @@ elif view == "Region explorer":
 
 
 # ─────────────────────────────────────────────────────────────────────────────
-# VIEW 3 — Model comparison
+# VIEW 3 — Housing supply impact (SARIMAX regions only)
 # ─────────────────────────────────────────────────────────────────────────────
-elif view == "Model comparison":
-    st.subheader("Final model vs ARIMA(2,2,2) baseline — 12-month holdout")
+elif view == "Housing supply impact":
+    st.subheader("SARIMAX scenarios")
     st.caption(
-        "Each region's chosen model (SARIMA or SARIMAX) is compared against a "
-        "plain ARIMA(2,2,2) refit on the identical training window. "
-        "MAE / RMSE in €/m², MAPE in %."
+        "Only the three **SARIMAX** regions use *number of new houses built* as a "
+        "driver, so only they can answer this. Each model's 12-month forecast is "
+        "re-run with new houses scaled from **−50% to +50%** versus the latest value "
+        "(all other drivers held fixed). Redder = less building, bluer = more building."
     )
 
-    tbl = metrics.copy()
-    tbl = tbl[[
-        "short_name", "chosen_model",
-        "final_mae", "arima_mae",
-        "final_rmse", "arima_rmse",
-        "final_mape", "arima_mape", "better",
-    ]]
-    tbl.columns = [
-        "Region", "Chosen",
-        "Chosen MAE", "ARIMA MAE",
-        "Chosen RMSE", "ARIMA RMSE",
-        "Chosen MAPE", "ARIMA MAPE", "Better",
-    ]
-    st.dataframe(
-        tbl.style.format({
-            "Chosen MAE": "{:.1f}", "ARIMA MAE": "{:.1f}",
-            "Chosen RMSE": "{:.1f}", "ARIMA RMSE": "{:.1f}",
-            "Chosen MAPE": "{:.2f}%", "ARIMA MAPE": "{:.2f}%",
-        }),
-        width="stretch", hide_index=True,
+    # Diverging palette over the supply levels (−50 … 0 … +50).
+    SUPPLY_COLORS = {
+        -50: "#b2182b", -30: "#d6604d", -15: "#f4a582",
+        0: "#444444",
+        15: "#92c5de", 30: "#4393c3", 50: "#2166ac",
+    }
+    sx_regions = [r for r in regions if specs[r]["type"] == "SARIMAX"]
+    levels = sorted(scenarios["supply_pct"].unique())
+
+    def supply_panel(region, show_legend):
+        sc = scenarios[scenarios["region"] == region]
+        anchor_date = pd.to_datetime(specs[region]["anchor_date"])
+        anchor_val = specs[region]["anchor_value"]
+        hist = history[region].iloc[-24:]
+
+        fig = go.Figure()
+        fig.add_trace(go.Scatter(
+            x=hist.index, y=hist.values, name="History",
+            line=dict(color="#999", width=2), showlegend=False,
+        ))
+        for lv in levels:
+            s = sc[sc["supply_pct"] == lv].sort_values("date")
+            x = [anchor_date] + list(s["date"])
+            y = [anchor_val] + list(s["point"])
+            is_base = lv == 0
+            fig.add_trace(go.Scatter(
+                x=x, y=y,
+                name="baseline" if is_base else f"{lv:+d}% supply",
+                line=dict(
+                    color=SUPPLY_COLORS.get(lv, "#888"),
+                    width=3.2 if is_base else 1.6,
+                    dash="solid" if is_base else "dot",
+                ),
+                showlegend=show_legend,
+            ))
+        fig.add_vline(x=anchor_date, line=dict(color="#bbb", width=1, dash="dot"))
+        fig.update_layout(
+            legend=dict(orientation="h", yanchor="bottom", y=1.0,
+                        xanchor="left", x=0, font=dict(size=10),
+                        bgcolor="rgba(0,0,0,0)", borderwidth=0),
+        )
+        return style_fig(fig, height=380)
+
+    cols = st.columns(len(sx_regions))
+    for c, region in zip(cols, sx_regions):
+        c.markdown(f"**{short_names[region]}**")
+        c.plotly_chart(supply_panel(region, show_legend=(region == sx_regions[0])),
+                       width="stretch")
+
+    st.subheader("Supply sensitivity — 12-month price change vs building more")
+    st.caption(
+        "Each line is the projected change from today's value at the 12-month "
+        "horizon, as new-house supply is scaled. A **downward** slope means more "
+        "building cools prices."
     )
+    fig2 = go.Figure()
+    for region in sx_regions:
+        sc = scenarios[scenarios["region"] == region]
+        anchor = specs[region]["anchor_value"]
+        xs, ys = [], []
+        for lv in levels:
+            end = sc[sc["supply_pct"] == lv].sort_values("date")["point"].iloc[-1]
+            xs.append(lv)
+            ys.append((end / anchor - 1) * 100)
+        fig2.add_trace(go.Scatter(
+            x=xs, y=ys, mode="lines+markers", name=short_names[region],
+            line=dict(color=colors[region], width=2.6),
+            marker=dict(size=7),
+        ))
+    fig2.add_vline(x=0, line=dict(color="#bbb", width=1, dash="dot"))
+    fig2 = style_fig(fig2, ytitle="12-month price change (%)", height=420)
+    fig2.update_xaxes(title="Change in new houses built (%)", ticksuffix="%")
+    st.plotly_chart(fig2, width="stretch")
 
-    st.info(meta["verdict"])
-
-    st.subheader("MAPE by region — chosen model vs ARIMA(2,2,2)")
-    m = metrics.sort_values("short_name")
-    fig = go.Figure()
-    fig.add_trace(go.Bar(x=m["short_name"], y=m["final_mape"],
-                         name="Chosen model", marker_color="#3498db"))
-    fig.add_trace(go.Bar(x=m["short_name"], y=m["arima_mape"],
-                         name="ARIMA(2,2,2)", marker_color="#e94560"))
-    fig.update_layout(barmode="group")
-    st.plotly_chart(style_fig(fig, ytitle="MAPE (%)", height=460),
-                    width="stretch")
+    sm = meta["supply"]
+    gl = sm.get("Grande Lisboa", {})
+    md = sm.get("Região Autónoma da Madeira", {})
+    st.info(
+        f"In **Grande Lisboa** — the strongest market — the model implies each "
+        f"**+10,000** new homes shifts prices by about "
+        f"**€{abs(gl.get('eur_per_10k_houses', 0)):,.0f}/m² "
+        f"{'lower' if gl.get('eur_per_10k_houses', 0) < 0 else 'higher'}**, the "
+        "textbook supply effect. Oeste e Vale do Tejo behaves the same way, more "
+        "weakly."
+    )
+    st.warning(
+        "**Caveat — R.A. Madeira goes the other way.** Its new-houses coefficient is "
+        f"**positive** (≈ €{md.get('eur_per_10k_houses', 0):,.0f}/m² per 10,000 "
+        "homes), so the model predicts prices *rise* with more supply. This is most "
+        "likely reverse causation — building concentrates where demand is already "
+        "hot — and a reminder that, with wide confidence intervals and a short "
+        "sample, individual SARIMAX coefficients should be read with caution."
+    )
 
 
 # ─────────────────────────────────────────────────────────────────────────────
