@@ -2,7 +2,7 @@ region,short_name,chosen_model,arima_mae,arima_rmse,arima_mape,final_mae,final_r
 Portugal,Portugal,SARIMA,23.4,28.7,1.13,9.7,11.2,0.48,Chosen
 Norte,Norte,SARIMA,22.7,30.7,1.27,26.8,34.6,1.52,"ARIMA(2,2,2)"
 Centro,Centro,SARIMA,21.0,26.7,1.59,66.8,80.0,5.1,"ARIMA(2,2,2)"
-Oeste e Vale do Tejo,Oeste e Vale do Tejo,SARIMAX,71.4,93.0,4.77,55.0,72.9,3.67,Chosen
+Oeste e Vale do Tejo,Oeste e Vale do Tejo,SARIMAX,71.4,93.0,4.77,55.8,73.9,3.72,Chosen
 Grande Lisboa,Grande Lisboa,SARIMAX,153.5,183.2,5.29,157.8,184.4,5.45,"ARIMA(2,2,2)"
 Península de Setúbal,Península de Setúbal,SARIMA,92.0,105.8,3.68,43.9,47.4,1.78,Chosen
 Alentejo,Alentejo,SARIMA,22.9,26.7,1.81,68.1,81.7,5.22,"ARIMA(2,2,2)"

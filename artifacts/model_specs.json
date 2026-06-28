@@ -250,6 +250,38 @@
     "Grande Lisboa",
     "R.A. Madeira"
   ],
+  "supply": {
+    "Oeste e Vale do Tejo": {
+      "short_name": "Oeste e Vale do Tejo",
+      "coef_per_house": -0.0542,
+      "eur_per_10k_houses": -542.0,
+      "new_houses_baseline": 488.0,
+      "anchor_value": 1680.0
+    },
+    "Grande Lisboa": {
+      "short_name": "Grande Lisboa",
+      "coef_per_house": -0.09147,
+      "eur_per_10k_houses": -915.0,
+      "new_houses_baseline": 812.0,
+      "anchor_value": 3278.0
+    },
+    "Região Autónoma da Madeira": {
+      "short_name": "R.A. Madeira",
+      "coef_per_house": 0.23918,
+      "eur_per_10k_houses": 2392.0,
+      "new_houses_baseline": 226.0,
+      "anchor_value": 2500.0
+    }
+  },
+  "supply_levels": [
+    -50,
+    -30,
+    -15,
+    0,
+    15,
+    30,
+    50
+  ],
   "n_regions": 10,
   "verdict": "SARIMAX was selected over SARIMA in 3 of 10 regions: Oeste e Vale do Tejo, Grande Lisboa, R.A. Madeira. Elsewhere the simpler SARIMA model was kept.",
   "colors": {
