@@ -88,13 +88,13 @@
         "new_houses",
         "unemployment"
       ],
-      "aic": 1309.5,
-      "anchor_date": "2025-10",
-      "anchor_value": 1583.0,
-      "forecast_start": "2025-11",
-      "forecast_end": "2026-10",
-      "forecast_end_value": 1858.7,
-      "pct_change_12m": 17.4
+      "aic": 1348.9,
+      "anchor_date": "2026-03",
+      "anchor_value": 1680.0,
+      "forecast_start": "2026-04",
+      "forecast_end": "2027-03",
+      "forecast_end_value": 1935.8,
+      "pct_change_12m": 15.2
     },
     "Grande Lisboa": {
       "short_name": "Grande Lisboa",
@@ -116,13 +116,13 @@
         "new_houses",
         "unemployment"
       ],
-      "aic": 1469.4,
-      "anchor_date": "2025-10",
-      "anchor_value": 3030.0,
-      "forecast_start": "2025-11",
-      "forecast_end": "2026-10",
-      "forecast_end_value": 3444.1,
-      "pct_change_12m": 13.7
+      "aic": 1512.5,
+      "anchor_date": "2026-03",
+      "anchor_value": 3278.0,
+      "forecast_start": "2026-04",
+      "forecast_end": "2027-03",
+      "forecast_end_value": 3754.8,
+      "pct_change_12m": 14.5
     },
     "Península de Setúbal": {
       "short_name": "Península de Setúbal",
@@ -236,13 +236,13 @@
         "new_houses",
         "unemployment"
       ],
-      "aic": 1602.1,
-      "anchor_date": "2025-10",
-      "anchor_value": 2308.0,
-      "forecast_start": "2025-11",
-      "forecast_end": "2026-10",
-      "forecast_end_value": 2330.0,
-      "pct_change_12m": 1.0
+      "aic": 1657.0,
+      "anchor_date": "2026-03",
+      "anchor_value": 2500.0,
+      "forecast_start": "2026-04",
+      "forecast_end": "2027-03",
+      "forecast_end_value": 2548.2,
+      "pct_change_12m": 1.9
     }
   },
   "sarimax_regions": [

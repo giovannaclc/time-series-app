@@ -35,30 +35,30 @@ Centro,Centro,2026-12-01,1386.6,1300.8,1472.3,SARIMA
 Centro,Centro,2027-01-01,1387.6,1296.6,1478.6,SARIMA
 Centro,Centro,2027-02-01,1389.1,1293.1,1485.1,SARIMA
 Centro,Centro,2027-03-01,1391.6,1290.9,1492.3,SARIMA
-Oeste e Vale do Tejo,Oeste e Vale do Tejo,2025-11-01,1604.0,1585.8,1622.2,SARIMAX
-Oeste e Vale do Tejo,Oeste e Vale do Tejo,2025-12-01,1626.1,1598.9,1653.3,SARIMAX
-Oeste e Vale do Tejo,Oeste e Vale do Tejo,2026-01-01,1648.6,1613.5,1683.8,SARIMAX
-Oeste e Vale do Tejo,Oeste e Vale do Tejo,2026-02-01,1672.0,1629.3,1714.7,SARIMAX
-Oeste e Vale do Tejo,Oeste e Vale do Tejo,2026-03-01,1694.7,1644.6,1744.8,SARIMAX
-Oeste e Vale do Tejo,Oeste e Vale do Tejo,2026-04-01,1717.8,1660.3,1775.3,SARIMAX
-Oeste e Vale do Tejo,Oeste e Vale do Tejo,2026-05-01,1741.0,1676.1,1806.0,SARIMAX
-Oeste e Vale do Tejo,Oeste e Vale do Tejo,2026-06-01,1765.1,1692.6,1837.5,SARIMAX
-Oeste e Vale do Tejo,Oeste e Vale do Tejo,2026-07-01,1788.2,1708.1,1868.3,SARIMAX
-Oeste e Vale do Tejo,Oeste e Vale do Tejo,2026-08-01,1812.9,1725.0,1900.7,SARIMAX
-Oeste e Vale do Tejo,Oeste e Vale do Tejo,2026-09-01,1835.8,1740.1,1931.6,SARIMAX
-Oeste e Vale do Tejo,Oeste e Vale do Tejo,2026-10-01,1858.7,1754.9,1962.5,SARIMAX
-Grande Lisboa,Grande Lisboa,2025-11-01,3068.1,3039.4,3096.7,SARIMAX
-Grande Lisboa,Grande Lisboa,2025-12-01,3104.4,3059.1,3149.6,SARIMAX
-Grande Lisboa,Grande Lisboa,2026-01-01,3140.3,3078.9,3201.7,SARIMAX
-Grande Lisboa,Grande Lisboa,2026-02-01,3177.6,3099.9,3255.3,SARIMAX
-Grande Lisboa,Grande Lisboa,2026-03-01,3212.2,3117.7,3306.8,SARIMAX
-Grande Lisboa,Grande Lisboa,2026-04-01,3247.9,3136.1,3359.8,SARIMAX
-Grande Lisboa,Grande Lisboa,2026-05-01,3283.4,3153.7,3413.1,SARIMAX
-Grande Lisboa,Grande Lisboa,2026-06-01,3318.4,3170.3,3466.4,SARIMAX
-Grande Lisboa,Grande Lisboa,2026-07-01,3351.8,3184.8,3518.8,SARIMAX
-Grande Lisboa,Grande Lisboa,2026-08-01,3380.9,3194.6,3567.2,SARIMAX
-Grande Lisboa,Grande Lisboa,2026-09-01,3412.8,3206.7,3618.9,SARIMAX
-Grande Lisboa,Grande Lisboa,2026-10-01,3444.1,3217.7,3670.4,SARIMAX
+Oeste e Vale do Tejo,Oeste e Vale do Tejo,2026-04-01,1701.6,1683.1,1720.0,SARIMAX
+Oeste e Vale do Tejo,Oeste e Vale do Tejo,2026-05-01,1723.3,1695.9,1750.7,SARIMAX
+Oeste e Vale do Tejo,Oeste e Vale do Tejo,2026-06-01,1745.9,1710.7,1781.2,SARIMAX
+Oeste e Vale do Tejo,Oeste e Vale do Tejo,2026-07-01,1767.5,1724.8,1810.1,SARIMAX
+Oeste e Vale do Tejo,Oeste e Vale do Tejo,2026-08-01,1790.9,1741.0,1840.7,SARIMAX
+Oeste e Vale do Tejo,Oeste e Vale do Tejo,2026-09-01,1812.3,1755.3,1869.4,SARIMAX
+Oeste e Vale do Tejo,Oeste e Vale do Tejo,2026-10-01,1833.6,1769.4,1897.9,SARIMAX
+Oeste e Vale do Tejo,Oeste e Vale do Tejo,2026-11-01,1853.4,1781.9,1924.9,SARIMAX
+Oeste e Vale do Tejo,Oeste e Vale do Tejo,2026-12-01,1872.6,1793.8,1951.4,SARIMAX
+Oeste e Vale do Tejo,Oeste e Vale do Tejo,2027-01-01,1894.6,1808.4,1980.9,SARIMAX
+Oeste e Vale do Tejo,Oeste e Vale do Tejo,2027-02-01,1914.1,1820.3,2007.8,SARIMAX
+Oeste e Vale do Tejo,Oeste e Vale do Tejo,2027-03-01,1935.8,1834.4,2037.2,SARIMAX
+Grande Lisboa,Grande Lisboa,2026-04-01,3321.0,3292.2,3349.8,SARIMAX
+Grande Lisboa,Grande Lisboa,2026-05-01,3363.7,3318.4,3409.1,SARIMAX
+Grande Lisboa,Grande Lisboa,2026-06-01,3406.1,3344.8,3467.4,SARIMAX
+Grande Lisboa,Grande Lisboa,2026-07-01,3447.1,3369.7,3524.5,SARIMAX
+Grande Lisboa,Grande Lisboa,2026-08-01,3484.0,3390.0,3578.0,SARIMAX
+Grande Lisboa,Grande Lisboa,2026-09-01,3523.6,3412.5,3634.7,SARIMAX
+Grande Lisboa,Grande Lisboa,2026-10-01,3562.6,3433.9,3691.4,SARIMAX
+Grande Lisboa,Grande Lisboa,2026-11-01,3603.0,3456.1,3750.0,SARIMAX
+Grande Lisboa,Grande Lisboa,2026-12-01,3642.3,3476.5,3808.0,SARIMAX
+Grande Lisboa,Grande Lisboa,2027-01-01,3681.9,3496.9,3866.9,SARIMAX
+Grande Lisboa,Grande Lisboa,2027-02-01,3717.7,3512.9,3922.5,SARIMAX
+Grande Lisboa,Grande Lisboa,2027-03-01,3754.8,3529.8,3979.9,SARIMAX
 Península de Setúbal,Península de Setúbal,2026-04-01,2696.4,2678.4,2714.5,SARIMA
 Península de Setúbal,Península de Setúbal,2026-05-01,2737.5,2706.5,2768.5,SARIMA
 Península de Setúbal,Península de Setúbal,2026-06-01,2779.5,2736.0,2823.0,SARIMA
@@ -107,15 +107,15 @@ Região Autónoma dos Açores,R.A. Açores,2026-12-01,1582.6,1452.1,1713.0,SARIM
 Região Autónoma dos Açores,R.A. Açores,2027-01-01,1585.0,1447.1,1722.8,SARIMA
 Região Autónoma dos Açores,R.A. Açores,2027-02-01,1585.3,1440.4,1730.2,SARIMA
 Região Autónoma dos Açores,R.A. Açores,2027-03-01,1586.1,1434.5,1737.8,SARIMA
-Região Autónoma da Madeira,R.A. Madeira,2025-11-01,2315.1,2273.6,2356.7,SARIMAX
-Região Autónoma da Madeira,R.A. Madeira,2025-12-01,2306.6,2238.4,2374.8,SARIMAX
-Região Autónoma da Madeira,R.A. Madeira,2026-01-01,2311.7,2214.8,2408.7,SARIMAX
-Região Autónoma da Madeira,R.A. Madeira,2026-02-01,2313.9,2199.9,2427.9,SARIMAX
-Região Autónoma da Madeira,R.A. Madeira,2026-03-01,2318.4,2187.0,2449.8,SARIMAX
-Região Autónoma da Madeira,R.A. Madeira,2026-04-01,2320.6,2175.2,2465.9,SARIMAX
-Região Autónoma da Madeira,R.A. Madeira,2026-05-01,2319.6,2160.8,2478.5,SARIMAX
-Região Autónoma da Madeira,R.A. Madeira,2026-06-01,2321.7,2150.9,2492.6,SARIMAX
-Região Autónoma da Madeira,R.A. Madeira,2026-07-01,2325.8,2143.5,2508.1,SARIMAX
-Região Autónoma da Madeira,R.A. Madeira,2026-08-01,2328.8,2135.8,2521.7,SARIMAX
-Região Autónoma da Madeira,R.A. Madeira,2026-09-01,2330.4,2127.3,2533.5,SARIMAX
-Região Autónoma da Madeira,R.A. Madeira,2026-10-01,2330.0,2117.2,2542.7,SARIMAX
+Região Autónoma da Madeira,R.A. Madeira,2026-04-01,2507.5,2464.8,2550.2,SARIMAX
+Região Autónoma da Madeira,R.A. Madeira,2026-05-01,2519.8,2449.4,2590.2,SARIMAX
+Região Autónoma da Madeira,R.A. Madeira,2026-06-01,2514.2,2413.4,2615.0,SARIMAX
+Região Autónoma da Madeira,R.A. Madeira,2026-07-01,2526.0,2407.6,2644.3,SARIMAX
+Região Autónoma da Madeira,R.A. Madeira,2026-08-01,2526.9,2390.2,2663.6,SARIMAX
+Região Autónoma da Madeira,R.A. Madeira,2026-09-01,2531.6,2380.6,2682.7,SARIMAX
+Região Autónoma da Madeira,R.A. Madeira,2026-10-01,2529.5,2364.3,2694.7,SARIMAX
+Região Autónoma da Madeira,R.A. Madeira,2026-11-01,2538.4,2360.8,2716.1,SARIMAX
+Região Autónoma da Madeira,R.A. Madeira,2026-12-01,2539.4,2349.8,2729.0,SARIMAX
+Região Autónoma da Madeira,R.A. Madeira,2027-01-01,2543.7,2343.0,2744.4,SARIMAX
+Região Autónoma da Madeira,R.A. Madeira,2027-02-01,2543.3,2332.0,2754.5,SARIMAX
+Região Autónoma da Madeira,R.A. Madeira,2027-03-01,2548.2,2326.9,2769.5,SARIMAX
