@@ -11,7 +11,7 @@ the final per-region models (SARIMA / SARIMAX) from `code.ipynb`.
 
 ```
 export_artifacts.py  ──reads──▶  *.csv (INE data)
-                     ──writes─▶  artifacts/{history,forecasts,metrics}.csv + model_specs.json
+                     ──writes─▶  artifacts/{history,forecasts,metrics,acf_pacf}.csv + model_specs.json
 app.py               ──reads──▶  artifacts/   (Streamlit + Plotly)
 ```
 

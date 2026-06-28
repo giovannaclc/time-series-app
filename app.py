@@ -19,9 +19,9 @@ import streamlit as st
 # ✏️  EDIT ME — presentation cover details (shown on the Introduction page).
 #     Fill these in by hand; they are not part of the analysis.
 # ─────────────────────────────────────────────────────────────────────────────
-COURSE = "‹ course name ›"
-FACULTY = "‹ faculty / university ›"
-GROUP_MEMBERS = "‹ group member names ›"
+COURSE = "Time Series (2025/2026)"
+FACULTY = "Faculty of Science - University of Lisbon"
+GROUP_MEMBERS = "Carlos da Cruz, Mercè Cortes, Giovanna Chaves, Emmanuel Nkata"
 # ─────────────────────────────────────────────────────────────────────────────
 
 ART = Path(__file__).parent / "artifacts"
@@ -43,8 +43,9 @@ def load_artifacts():
     history = pd.read_csv(ART / "history.csv", index_col="date", parse_dates=True)
     forecasts = pd.read_csv(ART / "forecasts.csv", parse_dates=["date"])
     metrics = pd.read_csv(ART / "metrics.csv")
+    acf_pacf = pd.read_csv(ART / "acf_pacf.csv")
     meta = json.loads((ART / "model_specs.json").read_text())
-    return history, forecasts, metrics, meta
+    return history, forecasts, metrics, acf_pacf, meta
 
 
 data = load_artifacts()
@@ -55,7 +56,7 @@ if data is None:
     )
     st.stop()
 
-history, forecasts, metrics, meta = data
+history, forecasts, metrics, acf_pacf, meta = data
 colors = meta["colors"]
 short_names = meta["short_names"]
 specs = meta["specs"]
@@ -89,6 +90,36 @@ def style_fig(fig, ytitle="€/m²", height=460):
     return fig
 
 
+def correlogram(sub, title, color):
+    """Interactive ACF/PACF stem plot with a 95% confidence band (around zero)."""
+    sub = sub.sort_values("lag")
+    lags = sub["lag"].tolist()
+    vals = sub["value"].tolist()
+    lo, hi = sub["lo"].tolist(), sub["hi"].tolist()
+
+    fig = go.Figure()
+    # 95% significance band (centred on zero)
+    fig.add_trace(go.Scatter(
+        x=lags + lags[::-1], y=hi + lo[::-1], fill="toself",
+        fillcolor="rgba(120,120,120,0.12)", line=dict(width=0),
+        hoverinfo="skip", showlegend=False,
+    ))
+    # stems
+    for lg, v in zip(lags, vals):
+        fig.add_shape(type="line", x0=lg, x1=lg, y0=0, y1=v,
+                      line=dict(color=color, width=1.6))
+    # markers (carry the hover)
+    fig.add_trace(go.Scatter(
+        x=lags, y=vals, mode="markers", marker=dict(color=color, size=7),
+        showlegend=False, hovertemplate="lag %{x}<br>%{y:.3f}<extra></extra>",
+    ))
+    fig.add_hline(y=0, line=dict(color="black", width=0.8))
+    fig.update_layout(title=title)
+    fig = style_fig(fig, ytitle="", height=320)
+    fig.update_xaxes(title="Lag", dtick=6)
+    return fig
+
+
 # ─────────────────────────────────────────────────────────────────────────────
 # Header + navigation
 # ─────────────────────────────────────────────────────────────────────────────
@@ -104,8 +135,8 @@ view = st.sidebar.radio(
     [
         "Introduction",
         "Data",
-        "Methodology",
         "Overview",
+        "Methodology",
         "Region explorer",
         "Model comparison",
         "Key findings",
@@ -236,7 +267,7 @@ elif view == "Methodology":
         "stationarity."
     )
 
-    st.markdown("##### 2 · Univariate model — ARIMA")
+    st.markdown("##### 2 · ARIMA")
     st.markdown(
         "Following the **Box-Jenkins** methodology, *p* and *q* were identified from "
         "the ACF/PACF of the differenced series. Six candidate ARIMA(p,2,q) "
@@ -256,7 +287,7 @@ elif view == "Methodology":
         "ACF/PACF, histogram, Q-Q plot) confirmed approximately white-noise residuals."
     )
 
-    st.markdown("##### 4 · Multivariate model — SARIMAX")
+    st.markdown("##### 4 · SARIMAX")
     st.markdown(
         "The framework was extended with four exogenous variables (inflation, "
         "mortgage rate, new housing completions, unemployment). A grid search over "
@@ -271,6 +302,32 @@ elif view == "Methodology":
         "estimation sample used for each SARIMAX model. Out-of-sample accuracy was "
         "evaluated over a **12-month holdout** using **MAE**, **RMSE** and **MAPE**. "
         "These accuracy measures did not drive model selection, to avoid data leakage."
+    )
+
+    st.divider()
+    st.markdown("##### ACF / PACF")
+    st.caption(
+        "The identification plots behind steps 2–3, up to 24 lags. "
+        "**d = 2** is used to identify the ARIMA(p,2,q) orders (report Fig. 4); "
+        "**d = 1** for the SARIMA grid search (report Fig. 5). Bars reaching outside "
+        "the shaded 95% band indicate statistically significant autocorrelation."
+    )
+    c1, c2 = st.columns([3, 2])
+    sel_short = c1.selectbox("Region", [short_names[r] for r in regions],
+                             key="acf_region")
+    diff = c2.radio("Differencing", [2, 1], horizontal=True,
+                    format_func=lambda d: f"d = {d}", key="acf_diff")
+    region = short_to_region[sel_short]
+    sub = acf_pacf[(acf_pacf["region"] == region) & (acf_pacf["diff"] == diff)]
+
+    pc, ac = st.columns(2)
+    pc.plotly_chart(
+        correlogram(sub[sub["kind"] == "PACF"], "PACF", "#e94560"),
+        width="stretch",
+    )
+    ac.plotly_chart(
+        correlogram(sub[sub["kind"] == "ACF"], "ACF", "#3498db"),
+        width="stretch",
     )
 
 
@@ -422,45 +479,38 @@ elif view == "Key findings":
 
     st.markdown("##### Forecasts (12 months, Mar 2026 → Mar 2027)")
     st.markdown(
-        "- All regions except **Alentejo** are projected to continue their upward "
-        "trajectory; nationally, prices are expected to keep rising fast — a "
-        "**+13.4% year-on-year** increase.\n"
-        "- **Grande Lisboa** remains the most expensive region by a substantial "
-        "margin: €3,278/m² → **€3,511/m² (+7.1%)**.\n"
-        "- **Península de Setúbal** shows the **largest increase of all regions, "
-        "+17.2%** (€2,653/m² → €3,110/m²), likely overtaking Algarve for second "
-        "place — possibly spillover from buyers priced out of Grande Lisboa.\n"
-        "- **Algarve** reaches €2,983/m² (**+5%**).\n"
-        "- **Alentejo** stays the most affordable and roughly flat (~€1,351–€1,359/m²); "
-        "**Centro** rises modestly to €1,392/m² (**+2.1%**) and **R.A. Açores** under 1%."
+        "- National prices rise **+13.4%** year-on-year.\n"
+        "- All regions are projected to rise except **Alentejo**, which stays roughly "
+        "flat (€1,351–€1,359/m²) and remains the most affordable.\n"
+        "- **Grande Lisboa** is the most expensive region: €3,278 → **€3,755/m² (+14.5%)**.\n"
+        "- **Península de Setúbal** has the largest increase, **+17.2%** "
+        "(€2,653 → €3,110/m²), moving ahead of Algarve into second place.\n"
+        "- **Algarve**: €2,840 → **€2,983/m² (+5.0%)**.\n"
+        "- **Centro**: €1,363 → **€1,392/m² (+2.1%)**; **R.A. Açores** under +1%."
     )
 
     st.markdown("##### Model selection")
     st.markdown(
-        "- **SARIMAX** was selected over SARIMA in **3 of 10 regions** — Oeste e Vale "
-        "do Tejo, Grande Lisboa and R.A. Madeira — with small AIC improvements of "
-        "4–4.8 points; elsewhere the simpler **SARIMA** was kept.\n"
-        "- On out-of-sample accuracy, **SARIMA outperforms SARIMAX in 8 of 10 "
-        "regions** — so in some markets the exogenous variables add explanatory power "
-        "but not predictive accuracy.\n"
+        "- **SARIMAX** was selected over SARIMA in **3 of 10 regions** (Oeste e Vale "
+        "do Tejo, Grande Lisboa, R.A. Madeira), with AIC improvements of 4–4.8 "
+        "points; SARIMA was kept elsewhere.\n"
+        "- On the 12-month holdout, **SARIMA is more accurate in 8 of 10 regions**; "
+        "only **Portugal** and **Oeste e Vale do Tejo** are better with SARIMAX.\n"
         "- The **number of new houses built** is the strongest predictor among the "
-        "variables used. In Grande Lisboa it is significant at 1%: ceteris paribus, "
-        "+10,000 new houses lowers prices by about **€896/m²**."
+        "exogenous variables. In Grande Lisboa it is significant at 1%: ceteris "
+        "paribus, +10,000 new houses lowers prices by **€896/m²**."
     )
 
-    st.markdown("##### Policy scenario — housing supply")
+    st.markdown("##### Housing-supply scenarios")
     st.markdown(
-        "Beyond the baseline (exogenous variables held at their last known value), "
-        "forecasts were also run for **+15%, +30% and +50%** in new houses built — "
-        "reflecting the Portuguese government's announced housing fiscal package "
-        "(reduced VAT, among other measures). A +50% supply increase moves Grande "
-        "Lisboa and Oeste e Vale do Tejo prices by only ~1%, highlighting a market "
-        "dominated by **price momentum** and short-run growth that is highly "
-        "**inelastic to construction**."
+        "Forecasts were run for **+15%, +30% and +50%** in new houses built, beyond "
+        "the baseline (exogenous variables held at their last known value):\n"
+        "- At +50% vs. baseline, **Grande Lisboa** and **Oeste e Vale do Tejo** fall "
+        "by about **1%**.\n"
+        "- **R.A. Madeira** rises as supply increases."
     )
 
     st.warning(
-        "**Limitations:** forecast confidence intervals are wide, which limits "
-        "precise inference, and the univariate SARIMA forecasts do not incorporate "
-        "economic variables."
+        "**Limitations:** forecast confidence intervals are wide, and the univariate "
+        "SARIMA forecasts do not incorporate economic variables."
     )

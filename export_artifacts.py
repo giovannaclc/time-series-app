@@ -20,6 +20,7 @@ import pandas as pd
 from sklearn.metrics import mean_absolute_error
 from statsmodels.tsa.arima.model import ARIMA
 from statsmodels.tsa.statespace.sarimax import SARIMAX
+from statsmodels.tsa.stattools import acf, pacf
 
 warnings.filterwarnings("ignore")
 
@@ -76,6 +77,7 @@ no_inflation = ["Oeste e Vale do Tejo", "Península de Setúbal"]
 FORECAST_STEPS = 12
 HOLDOUT = 12
 ARIMA_BASELINE = (2, 2, 2)
+ACF_LAGS = 24
 
 
 # ─────────────────────────────────────────────────────────────────────────────
@@ -140,6 +142,21 @@ def fit_sample(col, df, inflation, mortgage, new_houses, unemploy, end_date):
     return y_fit[valid], exog_fit[valid]
 
 
+def fit_sample_full(col, df, inflation, mortgage, new_houses, unemploy):
+    """(y, exog) on the FULL target sample for a SARIMAX region.
+
+    Exog series end before the target (e.g. new houses stops in Oct 2025), so
+    the regressors are held flat at their last observed value to cover the rest
+    of the target sample (and back-filled for any leading gap). This anchors the
+    SARIMAX forecast at the target's last month, matching the SARIMA forecasts
+    and avoiding a shifted anchor across regions.
+    """
+    exog = build_exog(col, inflation, mortgage, new_houses, unemploy)
+    y = df[col].dropna()
+    exog_full = exog.reindex(y.index).ffill().bfill()
+    return y, exog_full
+
+
 # ─────────────────────────────────────────────────────────────────────────────
 # 2. Fit final models + 12-month forecasts (notebook cell 23)
 # ─────────────────────────────────────────────────────────────────────────────
@@ -158,8 +175,8 @@ def fit_final(df, inflation, mortgage, new_houses, unemploy, end_date, regions):
             mtype, exog_vars = "SARIMA", []
         else:
             spec = sarimax_specs[col]
-            y, exog_fit = fit_sample(col, df, inflation, mortgage,
-                                     new_houses, unemploy, end_date)
+            y, exog_fit = fit_sample_full(col, df, inflation, mortgage,
+                                          new_houses, unemploy)
             model = SARIMAX(y, exog=exog_fit, order=spec["r_order"],
                             seasonal_order=spec["s_order"]).fit(disp=False)
             future_exog = pd.DataFrame(
@@ -264,6 +281,38 @@ def holdout_metrics(df, inflation, mortgage, new_houses, unemploy, end_date, reg
 
 
 # ─────────────────────────────────────────────────────────────────────────────
+# 4. ACF / PACF for model identification (notebook cells 8 [d=2] and 9 [d=1])
+# ─────────────────────────────────────────────────────────────────────────────
+def acf_pacf_table(df, regions):
+    """ACF/PACF values + 95% confidence bands (centred at zero, as in plot_acf)
+    for the first- and second-differenced series, lags 0–24."""
+    rows = []
+    for col in regions:
+        for d in (1, 2):
+            series = df[col]
+            for _ in range(d):
+                series = series.diff()
+            series = series.dropna()
+
+            a, a_ci = acf(series, nlags=ACF_LAGS, alpha=0.05)
+            p, p_ci = pacf(series, nlags=ACF_LAGS, alpha=0.05)
+            for kind, vals, ci in (("ACF", a, a_ci), ("PACF", p, p_ci)):
+                for lag in range(len(vals)):
+                    rows.append({
+                        "region": col,
+                        "short_name": short_names[col],
+                        "diff": d,
+                        "kind": kind,
+                        "lag": lag,
+                        "value": round(float(vals[lag]), 4),
+                        # band relative to zero, matching statsmodels plot_acf
+                        "lo": round(float(ci[lag, 0] - vals[lag]), 4),
+                        "hi": round(float(ci[lag, 1] - vals[lag]), 4),
+                    })
+    return pd.DataFrame(rows)
+
+
+# ─────────────────────────────────────────────────────────────────────────────
 def main():
     print("Loading data ...")
     df, inflation, mortgage, new_houses, unemploy, end_date, regions = load_data()
@@ -274,6 +323,9 @@ def main():
     hist = df.copy()
     hist.index.name = "date"
     hist.to_csv(ART / "history.csv")
+
+    print("Computing ACF / PACF (d=1, d=2) ...")
+    acf_pacf_table(df, regions).to_csv(ART / "acf_pacf.csv", index=False)
 
     print("Fitting final models + forecasts ...")
     fc_df, specs = fit_final(df, inflation, mortgage, new_houses,
