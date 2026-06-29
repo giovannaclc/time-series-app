@@ -537,7 +537,7 @@ elif view == "Key findings":
         "only **Portugal** and **Oeste e Vale do Tejo** are better with SARIMAX.\n"
         "- The **number of new houses built** is the strongest predictor among the "
         "exogenous variables. In Grande Lisboa it is significant at 1%: ceteris "
-        "paribus, +10,000 new houses lowers prices by **€896/m²**."
+        "paribus, +1,000 new houses lowers prices by **€89.6/m²**."
     )
 
     st.markdown("##### Housing-supply scenarios")
