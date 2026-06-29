@@ -270,7 +270,7 @@ elif view == "Methodology":
     st.markdown("##### 2 · ARIMA")
     st.markdown(
         "Following the **Box-Jenkins** methodology, *p* and *q* were identified from "
-        "the ACF/PACF of the differenced series. Six candidate ARIMA(p,2,q) "
+        "the ACF/PACF of the differenced series. Nine candidate ARIMA(p,2,q) "
         "specifications (*p,q ∈ {0,1,2}*) were estimated by maximum likelihood and "
         "compared by **AIC**; **ARIMA(2,2,2)** had the lowest AIC for nine of the ten "
         "series and was adopted for all ten for consistency. The Ljung-Box test then "
