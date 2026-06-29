@@ -270,7 +270,7 @@ elif view == "Methodology":
     st.markdown("##### 2 · ARIMA")
     st.markdown(
         "Following the **Box-Jenkins** methodology, *p* and *q* were identified from "
-        "the ACF/PACF of the differenced series. Nine candidate ARIMA(p,2,q) "
+        "the ACF/PACF of the differenced series. Six candidate ARIMA(p,2,q) "
         "specifications (*p,q ∈ {0,1,2}*) were estimated by maximum likelihood and "
         "compared by **AIC**; **ARIMA(2,2,2)** had the lowest AIC for nine of the ten "
         "series and was adopted for all ten for consistency. The Ljung-Box test then "
@@ -377,12 +377,11 @@ elif view == "Region explorer":
     color = colors[region]
 
     model_str = f"{spec['type']}{tuple(spec['order'])}{tuple(spec['seasonal_order'])}"
-    c1, c2, c3, c4 = st.columns(4)
+    c1, c2, c3 = st.columns(3)
     c1.metric("Model", spec["type"], help=model_str)
     c2.metric(f"Value ({spec['anchor_date']})", f"€{spec['anchor_value']:,.0f}")
     c3.metric(f"Forecast ({spec['forecast_end']})",
               f"€{spec['forecast_end_value']:,.0f}", f"{spec['pct_change_12m']:+.1f}%")
-    c4.metric("AIC", f"{spec['aic']:,.1f}")
 
     fc = forecasts[forecasts["region"] == region].sort_values("date")
     hist = history[region].iloc[-48:]
@@ -509,26 +508,6 @@ elif view == "Housing supply impact":
     fig2 = style_fig(fig2, ytitle="12-month price change (%)", height=420)
     fig2.update_xaxes(title="Change in new houses built (%)", ticksuffix="%")
     st.plotly_chart(fig2, width="stretch")
-
-    sm = meta["supply"]
-    gl = sm.get("Grande Lisboa", {})
-    md = sm.get("Região Autónoma da Madeira", {})
-    st.info(
-        f"In **Grande Lisboa** — the strongest market — the model implies each "
-        f"**+10,000** new homes shifts prices by about "
-        f"**€{abs(gl.get('eur_per_10k_houses', 0)):,.0f}/m² "
-        f"{'lower' if gl.get('eur_per_10k_houses', 0) < 0 else 'higher'}**, the "
-        "textbook supply effect. Oeste e Vale do Tejo behaves the same way, more "
-        "weakly."
-    )
-    st.warning(
-        "**Caveat — R.A. Madeira goes the other way.** Its new-houses coefficient is "
-        f"**positive** (≈ €{md.get('eur_per_10k_houses', 0):,.0f}/m² per 10,000 "
-        "homes), so the model predicts prices *rise* with more supply. This is most "
-        "likely reverse causation — building concentrates where demand is already "
-        "hot — and a reminder that, with wide confidence intervals and a short "
-        "sample, individual SARIMAX coefficients should be read with caution."
-    )
 
 
 # ─────────────────────────────────────────────────────────────────────────────
